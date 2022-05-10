@@ -1,0 +1,29 @@
+DDLs:
+Creating the accounts table ->
+CEATE TABLE IF NOT EXISTS `accounts` (
+	`id` int(11) NOT NULL AUTO_INCREMENT,
+  	`username` varchar(50) NOT NULL,
+  	`password` varchar(255) NOT NULL,
+  	`email` varchar(100) NOT NULL,
+    PRIMARY KEY (`id`)
+) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
+
+NOTE: I only used one table, in my opinion it was enough
+--------------------------------------------------------
+
+DMLs:
+In registering ->
+'SELECT id, password FROM accounts WHERE username = ?' -- checking if username already exists
+'INSERT INTO accounts (username, password, email, phone) VALUES (?, ?, ?, ?)' -- creating new account with its data
+NOTE: the '?' in the query is used to denote that this value will not be fixed, rather it'll be changing while being fetched from the database
+and we use the keyword bind_param('i', $_SESSION['id']); to specify the datatype of this value along with its name
+
+In ligging in ->
+'SELECT id, password FROM accounts WHERE username = ?' -- Verifying the user's credentials
+
+In home page ->
+"SELECT id, username, email, phone 
+	FROM accounts" -- getting all users' information to display them on screen
+
+In profile page ->
+'SELECT password, email, phone FROM accounts WHERE id = ?' -- getting the sigend in user's information to display them on the screen
